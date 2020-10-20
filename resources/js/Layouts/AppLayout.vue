@@ -15,8 +15,14 @@
                         <!-- Navigation Links -->
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             <jet-nav-link :href="route('dashboard')" :active="$page.currentRouteName == 'dashboard'">
-                                Dashboard
+                                ダッシュボード
                             </jet-nav-link>
+                            <jet-nav-link :href="route('users.index')" :active="$page.currentRouteName == 'users.index'">
+                                ユーザー一覧
+                            </jet-nav-link>
+                            <jet-nav-link :href="route('bookmarks.index')" :active="$page.currentRouteName == 'bookmarks.index'">
+                                ブックマーク
+                            </jet-nav-link>                            
                         </div>
                     </div>
 
@@ -121,6 +127,9 @@
                     <jet-responsive-nav-link :href="route('dashboard')" :active="$page.currentRouteName == 'dashboard'">
                         Dashboard
                     </jet-responsive-nav-link>
+                    <jet-nav-link :href="route('bookmarks.index')" :active="$page.currentRouteName == 'bookmarks.index'">
+                                ブックマーク
+                    </jet-nav-link>
                 </div>
 
                 <!-- Responsive Settings Options -->

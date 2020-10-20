@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Bookmark;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class BookmarkController extends Controller
 {
@@ -21,9 +22,9 @@ class BookmarkController extends Controller
     public function index()
     {
         //
-        $bookmark = Bookmark::where('user_id', Auth::id())->get();
+        $bookmarks = Bookmark::where('user_id', Auth::id())->get();
         //$all = Auth::user()->bookmark();
-        return $bookmark->toArray();
+        return Inertia::render('Bookmark/Index',['bookmarks' => $bookmarks]);
     }
 
     /**
@@ -34,7 +35,7 @@ class BookmarkController extends Controller
     public function create()
     {
         //
-        return view('bookmark.create');
+        return Inertia::render('Bookmark/Create');
     }
 
     /**
@@ -51,7 +52,7 @@ class BookmarkController extends Controller
         $bookmark->title = $request->title;
         $bookmark->number = $request->number;
         $bookmark->save();
-        return $bookmark->toArray();
+        return redirect()->route('bookmarks.index', $parameters = [], $status = 303, $headers = []);
     }
 
     /**
@@ -77,7 +78,8 @@ class BookmarkController extends Controller
     {
         //
         $bookmark = Bookmark::where([['user_id', Auth::id()],['id',$id]])->firstOrFail();
-        return view('bookmark.edit',compact('bookmark'));
+        //return view('bookmark.edit',compact('bookmark'));
+        return Inertia::render('Bookmark/Edit',['bookmark' => $bookmark]);
     }
 
     /**
@@ -95,9 +97,9 @@ class BookmarkController extends Controller
         //$bookmark->user_id = Auth::id();
         $bookmark->title = $request->title;
         $bookmark->number = $request->number;
-        $bookmark->completed = $request->completed ? True : False;
+        $bookmark->completed = $request->boolean('completed');
         $bookmark->save();
-        return $bookmark->toArray();
+        return redirect()->route('bookmarks.index', $parameters = [], $status = 303, $headers = []);
     }
 
     /**
