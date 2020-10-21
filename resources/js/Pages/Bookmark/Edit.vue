@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                ブックマーク
+                ブックマーク編集
             </h2>
         </template>
             <div>
@@ -94,9 +94,22 @@
 
         methods: {
             editBookmark() {
+                this.$inertia.put(route('bookmarks.update',this.bookmark.id),
+                    this.form,
+                    {
+                        preserveScroll: true,
+                        onSuccess: () => {
+                            //
+                        }
+                    });
+                /*
                 this.form.put(route('bookmarks.update',this.bookmark.id), {
-                    preserveScroll: true
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        //
+                    }
                 })
+                */
             },
         },
     }

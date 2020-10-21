@@ -3526,9 +3526,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     saveBookmark: function saveBookmark() {
-      this.form.post(route('bookmarks.store'), {
-        preserveScroll: true
+      this.$inertia.post(route('bookmarks.store'), this.form, {
+        preserveScroll: true,
+        onSuccess: function onSuccess() {//
+        }
       });
+      /*
+      this.form.post(route('bookmarks.store'), {
+          preserveScroll: true,
+          onSuccess: () => {
+              //
+          }
+      })
+      */
     }
   }
 });
@@ -3644,9 +3654,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     editBookmark: function editBookmark() {
-      this.form.put(route('bookmarks.update', this.bookmark.id), {
-        preserveScroll: true
+      this.$inertia.put(route('bookmarks.update', this.bookmark.id), this.form, {
+        preserveScroll: true,
+        onSuccess: function onSuccess() {//
+        }
       });
+      /*
+      this.form.put(route('bookmarks.update',this.bookmark.id), {
+          preserveScroll: true,
+          onSuccess: () => {
+              //
+          }
+      })
+      */
     }
   }
 });
@@ -3664,8 +3684,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _MyBookmark__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MyBookmark */ "./resources/js/Pages/Bookmark/MyBookmark.vue");
-//
-//
 //
 //
 //
@@ -3727,6 +3745,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 //import JetSectionTitle from './SectionTitle'
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -3734,9 +3757,31 @@ __webpack_require__.r(__webpack_exports__);
       type: Object
     }
   },
+  data: function data() {
+    return {
+      form: this.$inertia.form({
+        '_method': 'DELETE'
+      }, {
+        bag: 'bookmarkDelete'
+      })
+    };
+  },
   methods: {
-    edit: function edit(event) {
-      alert("edit");
+    bookmarkDelete: function bookmarkDelete(event) {
+      //alert("DEL:"+this.bookmark.id);
+      this.$inertia["delete"](route('bookmarks.destroy', this.bookmark.id), this.form, {
+        preserveScroll: true,
+        onSuccess: function onSuccess() {//
+        }
+      });
+      /*
+      this.form.post(route('bookmarks.destroy', this.bookmark.id), {
+          preserveScroll: true,
+          onSuccess: () => {
+              //
+          }
+      })
+      */
     }
   }
 });
@@ -26428,7 +26473,7 @@ var render = function() {
                   staticClass:
                     "font-semibold text-xl text-gray-800 leading-tight"
                 },
-                [_vm._v("\n            ブックマーク\n        ")]
+                [_vm._v("\n            ブックマーク作成\n        ")]
               )
             ]
           },
@@ -26690,7 +26735,7 @@ var render = function() {
                   staticClass:
                     "font-semibold text-xl text-gray-800 leading-tight"
                 },
-                [_vm._v("\n            ブックマーク\n        ")]
+                [_vm._v("\n            ブックマーク編集\n        ")]
               )
             ]
           },
@@ -26952,7 +26997,7 @@ var render = function() {
                   staticClass:
                     "font-semibold text-xl text-gray-800 leading-tight"
                 },
-                [_vm._v("\n            ブックマーク\n        ")]
+                [_vm._v("\n            ブックマーク一覧\n        ")]
               )
             ]
           },
@@ -26962,21 +27007,29 @@ var render = function() {
     },
     [
       _vm._v(" "),
-      _c("div", { staticClass: "py-6" }, [
-        _c(
-          "div",
-          { staticClass: "bg-white overflow-hidden shadow-xl sm:rounded-lg" },
-          [
-            _c("div", { staticClass: "max-w-7xl mx-auto sm:px-6 lg:px-8" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "h-100 w-full flex items-center justify-center bg-teal-lightest font-sans"
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg"
+            },
+            [
               _c(
                 "div",
-                { staticClass: "p-4" },
+                { staticClass: "mb-4" },
                 [
                   _c(
                     "inertia-link",
                     {
                       staticClass:
-                        "bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-4 px-4 border border-blue-500 hover:border-transparent rounded",
+                        "w-full flex bg-transparent item-center justify-center hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded",
                       attrs: { href: _vm.route("bookmarks.create") }
                     },
                     [
@@ -26989,22 +27042,20 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("div", [
-                _c(
-                  "ul",
-                  _vm._l(_vm.bookmarks, function(bookmark) {
-                    return _c("my-bookmark", {
-                      key: bookmark.id,
-                      attrs: { bookmark: bookmark }
-                    })
-                  }),
-                  1
-                )
-              ])
-            ])
-          ]
-        )
-      ])
+              _c(
+                "div",
+                _vm._l(_vm.bookmarks, function(bookmark) {
+                  return _c("my-bookmark", {
+                    key: bookmark.id,
+                    attrs: { bookmark: bookmark }
+                  })
+                }),
+                1
+              )
+            ]
+          )
+        ]
+      )
     ]
   )
 }
@@ -27032,9 +27083,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "py-2" },
+    { staticClass: "flex mb-4 items-center" },
     [
-      _c("div", { staticClass: "bookmark title" }, [
+      _c("p", { staticClass: "w-full text-grey-darkest" }, [
         _vm._v(
           "\n         " +
             _vm._s(_vm.bookmark.title) +
@@ -27046,8 +27097,22 @@ var render = function() {
       _vm._v(" "),
       _c(
         "inertia-link",
-        { attrs: { href: _vm.route("bookmarks.edit", _vm.bookmark.id) } },
-        [_vm._v("編集")]
+        {
+          staticClass:
+            "flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green border-green hover:bg-green",
+          attrs: { href: _vm.route("bookmarks.edit", _vm.bookmark.id) }
+        },
+        [_vm._v("\n        ✏\n    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass:
+            "flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red cursor-pointer",
+          on: { click: _vm.bookmarkDelete }
+        },
+        [_vm._v("\n        🗑\n    ")]
       )
     ],
     1

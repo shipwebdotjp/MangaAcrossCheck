@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                ブックマーク
+                ブックマーク作成
             </h2>
         </template>
             <div>
@@ -90,9 +90,20 @@
 
         methods: {
             saveBookmark() {
-                this.form.post(route('bookmarks.store'), {
-                    preserveScroll: true
+                this.$inertia.post(route('bookmarks.store'), this.form, {
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        //
+                    }
                 })
+                /*
+                this.form.post(route('bookmarks.store'), {
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        //
+                    }
+                })
+                */
             },
         },
     }

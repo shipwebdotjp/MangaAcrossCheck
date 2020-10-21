@@ -112,6 +112,6 @@ class BookmarkController extends Controller
     {
         //
         $bookmark = Bookmark::where([['user_id', Auth::id()],['id',$id]])->delete();
-        return redirect('/bookmarks');
+        return redirect()->route('bookmarks.index', $parameters = [], $status = 303, $headers = []);
     }
 }

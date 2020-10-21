@@ -2,27 +2,25 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                ブックマーク
+                ブックマーク一覧
             </h2>
         </template>
 
-        <div class="py-6">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="p-4">
-                        <inertia-link :href="route('bookmarks.create')" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-4 px-4 border border-blue-500 hover:border-transparent rounded">
+        
+            <div class="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
+                <div class="bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
+                    <div class="mb-4">
+                        <inertia-link :href="route('bookmarks.create')" class="w-full flex bg-transparent item-center justify-center hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                             新しくブックマークを作る
                         </inertia-link>
                     </div>
                     
                     <div >
-                        <ul>
-                            <my-bookmark v-for="bookmark in bookmarks" v-bind:key="bookmark.id" v-bind:bookmark="bookmark" />
-                        </ul>
+                        <my-bookmark v-for="bookmark in bookmarks" v-bind:key="bookmark.id" v-bind:bookmark="bookmark" />
                     </div>
                 </div>
             </div>
-        </div>
+        
     </app-layout>
 </template>
 
