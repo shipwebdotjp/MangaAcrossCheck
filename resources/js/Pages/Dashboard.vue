@@ -2,7 +2,7 @@
     <app-layout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                ダッシュボード
+                ホーム
             </h2>
         </template>
 
@@ -17,8 +17,8 @@
 </template>
 
 <script>
-    import AppLayout from './../Layouts/AppLayout'
-    import Welcome from './../Jetstream/Welcome'
+    import AppLayout from '@/Layouts/AppLayout'
+    import Welcome from '@/Jetstream/Welcome'
 
     export default {
         components: {

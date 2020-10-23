@@ -6,7 +6,7 @@
             </div>
 
             <div class="mt-8 text-2xl">
-                このアプリについて
+                Welcome to your Jetstream application!
             </div>
 
             <div class="mt-6 text-gray-500">
@@ -94,7 +94,7 @@
 </template>
 
 <script>
-    import JetApplicationLogo from './../Jetstream/ApplicationLogo'
+    import JetApplicationLogo from '@/Jetstream/ApplicationLogo'
 
     export default {
         components: {

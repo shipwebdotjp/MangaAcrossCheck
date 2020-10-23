@@ -19,13 +19,13 @@
                         <template #form>
                             <div class="col-span-6 sm:col-span-4">
                                 <jet-label for="title" value="マンガタイトル" />
-                                <jet-input id="title" type="text" class="mt-1 block w-full" v-model="form.title" ref="title" autocomplete="title" />
+                                <jet-input id="title" type="text" class="mt-1 block w-full" v-model="form.title" ref="title" required autocomplete="title" />
                                 <jet-input-error :message="form.error('title')" class="mt-2" />
                             </div>
 
                             <div class="col-span-6 sm:col-span-4">
                                 <jet-label for="number" value="読んだ話数" />
-                                <jet-input id="number" type="text" class="mt-1 block w-full" v-model="form.number" ref="number" autocomplete="number" />
+                                <jet-input id="number" type="text" class="mt-1 block w-full" v-model="form.number" ref="number" autofocus autocomplete="number" />
                                 <jet-input-error :message="form.error('title')" class="mt-2" />
                             </div>
 
