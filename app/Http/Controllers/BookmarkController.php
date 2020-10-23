@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Bookmark;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
 
 class BookmarkController extends Controller
 {
@@ -47,6 +48,15 @@ class BookmarkController extends Controller
     public function store(Request $request)
     {
         //
+        $validator = Validator::make($request->all(), [
+            'title' => ['required', 'string', 'max:255'],
+            'number' => ['required', 'string', 'max:100']
+        ]);//->validate();
+        if ($validator->fails()) {
+            
+            //return redirect()->route('bookmarks.create', $parameters = [], $status = 303, $headers = [])->withErrors($validator);
+            return Inertia::render('Bookmark/Create',['errors' => $validator->errors()]);
+        }
         $bookmark = new Bookmark;
         $bookmark->user_id = Auth::id();
         $bookmark->title = $request->title;
