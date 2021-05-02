@@ -13,10 +13,13 @@
                         </template>
 
                         <template #description>
-                            マンガのタイトルと，どこまで読んだのかを記録しましょう
+                            マンガのタイトルと，どこまで読んだのかを記録しましょう。毎日忘れずに！
                         </template>
 
                         <template #form>
+                            <div class="col-span-6 sm:col-span-4">
+                                <jet-validation-errors class="mb-4" />
+                            </div>
                             <div class="col-span-6 sm:col-span-4">
                                 <jet-label for="title" value="マンガタイトル" />
                                 <jet-input id="title" type="text" class="mt-1 block w-full" v-model="form.title" ref="title" required autocomplete="title" />
@@ -26,7 +29,7 @@
                             <div class="col-span-6 sm:col-span-4">
                                 <jet-label for="number" value="読んだ話数" />
                                 <jet-input id="number" type="text" class="mt-1 block w-full" v-model="form.number" ref="number" autofocus autocomplete="number" />
-                                <jet-input-error :message="form.error('title')" class="mt-2" />
+                                <jet-input-error :message="form.error('number')" class="mt-2" />
                             </div>
 
                             <div class="col-span-6 sm:col-span-4">
@@ -64,6 +67,7 @@
     import JetInput from './../../Jetstream/Input'
     import JetInputError from './../../Jetstream/InputError'
     import JetLabel from './../../Jetstream/Label'
+    import JetValidationErrors from './../../Jetstream/ValidationErrors'    
 
     export default {
         components: {
@@ -74,6 +78,7 @@
             JetInput,
             JetInputError,
             JetLabel,
+            JetValidationErrors,
         },
         props:{
             bookmark: {

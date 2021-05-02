@@ -4048,6 +4048,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
 /* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
 /* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../../Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
+/* harmony import */ var _Jetstream_ValidationErrors__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./../../Jetstream/ValidationErrors */ "./resources/js/Jetstream/ValidationErrors.vue");
 //
 //
 //
@@ -4107,6 +4108,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 
@@ -4122,7 +4129,8 @@ __webpack_require__.r(__webpack_exports__);
     JetFormSection: _Jetstream_FormSection__WEBPACK_IMPORTED_MODULE_3__["default"],
     JetInput: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_4__["default"],
     JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_5__["default"],
-    JetLabel: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_6__["default"]
+    JetLabel: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_6__["default"],
+    JetValidationErrors: _Jetstream_ValidationErrors__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   props: {
     errors: {
@@ -4147,14 +4155,6 @@ __webpack_require__.r(__webpack_exports__);
         onSuccess: function onSuccess() {//
         }
       });
-      /*
-      this.form.post(route('bookmarks.store'), {
-          preserveScroll: true,
-          onSuccess: () => {
-              //
-          }
-      })
-      */
     }
   }
 });
@@ -4177,6 +4177,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../Jetstream/Input */ "./resources/js/Jetstream/Input.vue");
 /* harmony import */ var _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../Jetstream/InputError */ "./resources/js/Jetstream/InputError.vue");
 /* harmony import */ var _Jetstream_Label__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../../Jetstream/Label */ "./resources/js/Jetstream/Label.vue");
+/* harmony import */ var _Jetstream_ValidationErrors__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./../../Jetstream/ValidationErrors */ "./resources/js/Jetstream/ValidationErrors.vue");
 //
 //
 //
@@ -4235,6 +4236,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -4250,7 +4255,8 @@ __webpack_require__.r(__webpack_exports__);
     JetFormSection: _Jetstream_FormSection__WEBPACK_IMPORTED_MODULE_3__["default"],
     JetInput: _Jetstream_Input__WEBPACK_IMPORTED_MODULE_4__["default"],
     JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_5__["default"],
-    JetLabel: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_6__["default"]
+    JetLabel: _Jetstream_Label__WEBPACK_IMPORTED_MODULE_6__["default"],
+    JetValidationErrors: _Jetstream_ValidationErrors__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   props: {
     bookmark: {
@@ -29167,6 +29173,18 @@ var render = function() {
                         "div",
                         { staticClass: "col-span-6 sm:col-span-4" },
                         [
+                          _c("jet-validation-errors", {
+                            staticClass: "mb-4",
+                            attrs: { bag: "saveBookmark" }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-span-6 sm:col-span-4" },
+                        [
                           _c("jet-label", {
                             attrs: { for: "title", value: "マンガタイトル" }
                           }),
@@ -29189,12 +29207,10 @@ var render = function() {
                             }
                           }),
                           _vm._v(" "),
-                          _vm.errors.title
-                            ? _c("jet-input-error", {
-                                staticClass: "mt-2",
-                                attrs: { message: _vm.errors.title[0] }
-                              })
-                            : _vm._e()
+                          _c("jet-input-error", {
+                            staticClass: "mt-2",
+                            attrs: { message: _vm.form.error("title") }
+                          })
                         ],
                         1
                       ),
@@ -29224,12 +29240,10 @@ var render = function() {
                             }
                           }),
                           _vm._v(" "),
-                          _vm.errors.number
-                            ? _c("jet-input-error", {
-                                staticClass: "mt-2",
-                                attrs: { message: _vm.errors.number[0] }
-                              })
-                            : _vm._e()
+                          _c("jet-input-error", {
+                            staticClass: "mt-2",
+                            attrs: { message: _vm.form.error("number") }
+                          })
                         ],
                         1
                       ),
@@ -29291,12 +29305,10 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _vm.errors.completed
-                            ? _c("jet-input-error", {
-                                staticClass: "mt-2",
-                                attrs: { message: _vm.errors.completed[0] }
-                              })
-                            : _vm._e()
+                          _c("jet-input-error", {
+                            staticClass: "mt-2",
+                            attrs: { message: _vm.form.error("completed") }
+                          })
                         ],
                         1
                       )
@@ -29422,7 +29434,7 @@ var render = function() {
                   fn: function() {
                     return [
                       _vm._v(
-                        "\n                        マンガのタイトルと，どこまで読んだのかを記録しましょう\n                    "
+                        "\n                        マンガのタイトルと，どこまで読んだのかを記録しましょう。毎日忘れずに！\n                    "
                       )
                     ]
                   },
@@ -29432,6 +29444,13 @@ var render = function() {
                   key: "form",
                   fn: function() {
                     return [
+                      _c(
+                        "div",
+                        { staticClass: "col-span-6 sm:col-span-4" },
+                        [_c("jet-validation-errors", { staticClass: "mb-4" })],
+                        1
+                      ),
+                      _vm._v(" "),
                       _c(
                         "div",
                         { staticClass: "col-span-6 sm:col-span-4" },
@@ -29494,7 +29513,7 @@ var render = function() {
                           _vm._v(" "),
                           _c("jet-input-error", {
                             staticClass: "mt-2",
-                            attrs: { message: _vm.form.error("title") }
+                            attrs: { message: _vm.form.error("number") }
                           })
                         ],
                         1

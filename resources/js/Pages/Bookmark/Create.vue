@@ -17,17 +17,21 @@
                         </template>
                         
                         <template #form>
-                            
+                            <div class="col-span-6 sm:col-span-4">
+                                <jet-validation-errors bag="saveBookmark" class="mb-4" />
+                            </div>
                             <div class="col-span-6 sm:col-span-4">
                                 <jet-label for="title" value="マンガタイトル" />
                                 <jet-input id="title" type="text" class="mt-1 block w-full" v-model="form.title" ref="title"  autofocus autocomplete="title" />
-                                <jet-input-error v-if="errors.title" :message="errors.title[0]" class="mt-2" />
+                                <jet-input-error :message="form.error('title')" class="mt-2" />
+                                
                             </div>
 
                             <div class="col-span-6 sm:col-span-4">
                                 <jet-label for="number" value="読んだ話数" />
                                 <jet-input id="number" type="text" class="mt-1 block w-full" v-model="form.number" ref="number" autocomplete="number" />
-                                <jet-input-error v-if="errors.number" :message="errors.number[0]" class="mt-2" />
+                                <jet-input-error :message="form.error('number')" class="mt-2" />
+                                
                             </div>
 
                             <div class="col-span-6 sm:col-span-4">
@@ -35,7 +39,8 @@
                                     <input id="completed" type="checkbox" class="mt-1" v-model="form.completed"  />
                                     最後まで読み終えた場合はチェック
                                 </label>
-                                <jet-input-error v-if="errors.completed" :message="errors.completed[0]" class="mt-2" />
+                                <jet-input-error :message="form.error('completed')" class="mt-2" />
+                                
                             </div>
                         </template>
 
@@ -65,7 +70,8 @@
     import JetInput from './../../Jetstream/Input'
     import JetInputError from './../../Jetstream/InputError'
     import JetLabel from './../../Jetstream/Label'
-    
+    import JetValidationErrors from './../../Jetstream/ValidationErrors' 
+
     export default {
         components: {
             AppLayout,
@@ -75,6 +81,7 @@
             JetInput,
             JetInputError,
             JetLabel,
+            JetValidationErrors,
         },
         props:{
             errors: {
@@ -101,14 +108,6 @@
                         //
                     }
                 })
-                /*
-                this.form.post(route('bookmarks.store'), {
-                    preserveScroll: true,
-                    onSuccess: () => {
-                        //
-                    }
-                })
-                */
             },
         },
     }
