@@ -25,7 +25,6 @@ class BookmarkController extends Controller
     {
         //
         $bookmarks = Bookmark::where('user_id', Auth::id())->get();
-        //$all = Auth::user()->bookmark();
         return Inertia::render('Bookmark/Index',['bookmarks' => $bookmarks]);
     }
 
@@ -46,23 +45,17 @@ class BookmarkController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BookmarkStoreRequest $request) //Request
+    public function store(BookmarkStoreRequest $request) //RequestからFormRequestへ変更
     {
         //
         /*
+        //FormRequestを使用しない場合はこのように各々バリデーションする必要がある
         $validator = Validator::make($request->all(), [
             'title' => ['required', 'string', 'max:255'],
             'number' => ['required', 'string', 'max:100']
         ])->validatewithBag('saveBookmark');
         */
-        /*
-        if ($validator->fails()) {
-            
-            //return redirect()->route('bookmarks.create', $parameters = [], $status = 303, $headers = [])->withErrors($validator);
-            return Inertia::render('Bookmark/Create',['errors' => $validator->errors()]);
-        }
-        */
-
+        //BookmarkStoreRequestによって既に$requestはバリデート済み
         $bookmark = new Bookmark;
         $bookmark->user_id = Auth::id();
         $bookmark->title = $request->title;
@@ -94,7 +87,6 @@ class BookmarkController extends Controller
     {
         //
         $bookmark = Bookmark::where([['user_id', Auth::id()],['id',$id]])->firstOrFail();
-        //return view('bookmark.edit',compact('bookmark'));
         return Inertia::render('Bookmark/Edit',['bookmark' => $bookmark]);
     }
 
@@ -105,17 +97,18 @@ class BookmarkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BookmarkStoreRequest $request, $id)
     {
         //
-        //
+        /*
+        //FormRequestを使用しない場合はこのように各々バリデーションする必要がある
         $validator = Validator::make($request->all(), [
             'title' => ['required', 'string', 'max:255'],
             'number' => ['required', 'string', 'max:100']
-        ])->validate();
-                
+        ])->validatewithBag('saveBookmark');
+        */
+        //BookmarkStoreRequestによって既に$requestはバリデート済み
         $bookmark = Bookmark::where([['user_id', Auth::id()],['id',$id]])->firstOrFail();
-        //$bookmark->user_id = Auth::id();
         $bookmark->title = $request->title;
         $bookmark->number = $request->number;
         $bookmark->completed = $request->boolean('completed');

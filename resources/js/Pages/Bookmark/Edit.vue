@@ -18,7 +18,7 @@
 
                         <template #form>
                             <div class="col-span-6 sm:col-span-4">
-                                <jet-validation-errors class="mb-4" />
+                                <jet-validation-errors bag="saveBookmark" class="mb-4" />
                             </div>
                             <div class="col-span-6 sm:col-span-4">
                                 <jet-label for="title" value="マンガタイトル" />
@@ -92,7 +92,7 @@
                     number: this.bookmark.number,
                     completed: this.bookmark.completed,
                 }, {
-                    bag: 'editBookmark',
+                    bag: 'saveBookmark',
                 }),
             }
         },

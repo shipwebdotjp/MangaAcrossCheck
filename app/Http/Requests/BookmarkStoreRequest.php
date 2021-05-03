@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class BookmarkStoreRequest extends FormRequest
 {
-    protected $errorBag = 'saveBookmark';
+    protected $errorBag = 'saveBookmark';   //Name of ErrorBag
 
     /**
      * Determine if the user is authorized to make this request.

@@ -4270,7 +4270,7 @@ __webpack_require__.r(__webpack_exports__);
         number: this.bookmark.number,
         completed: this.bookmark.completed
       }, {
-        bag: 'editBookmark'
+        bag: 'saveBookmark'
       })
     };
   },
@@ -29447,7 +29447,12 @@ var render = function() {
                       _c(
                         "div",
                         { staticClass: "col-span-6 sm:col-span-4" },
-                        [_c("jet-validation-errors", { staticClass: "mb-4" })],
+                        [
+                          _c("jet-validation-errors", {
+                            staticClass: "mb-4",
+                            attrs: { bag: "saveBookmark" }
+                          })
+                        ],
                         1
                       ),
                       _vm._v(" "),
