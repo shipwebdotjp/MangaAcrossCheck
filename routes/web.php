@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AnswerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,10 @@ Route::resource('bookmarks', BookmarkController::class);
 
 //ユーザーのルーティング
 Route::resource('users', UserController::class);
+
+//答えのルーティング
+
+// Route::get('/answers',[App\Http\Controllers\AnswerController::class, 'index'])->name('answers.index');
+Route::get('/answers','AnswerController')->name('answers.index');
+Route::post('/answers/store',[App\Http\Controllers\AnswerController::class, 'store'])->name('answers.store');
+// Route::resource('answers', AnswerController::class);
